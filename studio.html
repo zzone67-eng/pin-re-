@@ -6,14 +6,14 @@
   <link rel="icon" href="image/pavicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&family=Fragment+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Fragment+Mono&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     :root{
       --G:#253528;--Gm:#344a38;--C:#f3f0e8;--P:#f6f4f0;
       --A:#b8a478;--M:#7a8a7d;--L:rgba(37,53,40,0.11);
       --serif:'Cormorant Garamond',Georgia,serif;
-      --sans:'Inter',system-ui,sans-serif;
+      --sans:'Outfit',system-ui,sans-serif;
       --mono:'Fragment Mono',monospace;
       --W:1080px;
     }
@@ -37,8 +37,8 @@
     /* FOOTER */
     footer{background:var(--G);color:var(--C);padding:clamp(64px,9vw,120px) clamp(32px,6vw,80px) 48px;}
     .fi{max-width:var(--W);margin:0 auto;}
-    .fb{font-family:var(--serif);font-size:clamp(48px,8vw,104px);font-weight:300;line-height:0.88;letter-spacing:-0.02em;margin-bottom:72px;}
-    .fb em{font-style:italic;color:var(--A);}
+    .fb{font-family:var(--sans);font-size:clamp(40px,7vw,88px);font-weight:300;line-height:0.92;letter-spacing:0em;margin-bottom:72px;}
+    .fb em{font-style:normal;color:var(--A);}
     .fc{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-top:40px;border-top:1px solid rgba(243,240,232,0.12);}
     .fch{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--A);margin-bottom:14px;}
     .fcb{font-size:14px;line-height:2.1;color:rgba(243,240,232,0.8);}
@@ -61,8 +61,8 @@
     .ph-in{max-width:var(--W);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;}
     .ph-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--A);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
     .ph-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--A);}
-    .ph-title{font-family:var(--serif);font-size:clamp(48px,8vw,104px);font-weight:300;line-height:0.88;letter-spacing:-0.02em;color:var(--C);}
-    .ph-title em{font-style:italic;color:var(--A);}
+    .ph-title{font-family:var(--sans);font-size:clamp(40px,7vw,88px);font-weight:300;line-height:0.92;letter-spacing:0em;color:var(--C);}
+    .ph-title em{font-style:normal;color:var(--A);}
     .ph-right{display:flex;flex-direction:column;gap:24px;justify-content:flex-end;}
     .ph-desc{font-size:15px;color:rgba(243,240,232,0.82);line-height:1.9;max-width:38ch;}
     .ph-cta{width:fit-content;display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;letter-spacing:0.12em;text-transform:uppercase;background:var(--A);color:var(--G);padding:16px 32px;font-weight:700;transition:gap .3s,background .25s,transform .2s;}
@@ -78,8 +78,8 @@
     .sp-photo img{height:100%;transition:transform .65s cubic-bezier(0.25,0.46,0.45,0.94);}
     .sp-row:hover .sp-photo img{transform:scale(1.04);}
     .sp-num{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--A);margin-bottom:18px;}
-    .sp-name{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.05;margin-bottom:18px;color:var(--G);}
-    .sp-name em{font-style:italic;color:var(--Gm);}
+    .sp-name{font-family:var(--sans);font-size:clamp(26px,3.5vw,42px);font-weight:300;line-height:1.05;margin-bottom:18px;color:var(--G);}
+    .sp-name em{font-style:normal;color:var(--A);}
     .sp-desc{font-size:15px;color:#3a4a3e;line-height:1.9;max-width:36ch;margin-bottom:28px;}
     .sp-btn{width:fit-content;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;background:var(--G);color:var(--C);padding:14px 28px;transition:gap .3s,background .25s,transform .2s;}
     .sp-btn:hover{gap:18px;background:var(--Gm);transform:translateY(-1px);}
@@ -88,8 +88,8 @@
     /* BANNER */
     .banner{background:var(--G);color:var(--C);padding:72px clamp(32px,6vw,80px);}
     .banner-in{max-width:var(--W);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:40px;}
-    .banner-txt{font-family:var(--serif);font-size:clamp(28px,4vw,52px);font-weight:300;line-height:1.1;}
-    .banner-txt em{font-style:italic;color:var(--A);}
+    .banner-txt{font-family:var(--sans);font-size:clamp(22px,3.5vw,42px);font-weight:300;line-height:1.1;}
+    .banner-txt em{font-style:normal;color:var(--A);}
     .banner-btn{flex-shrink:0;font-family:var(--mono);font-size:13px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;padding:16px 36px;border:1.5px solid rgba(243,240,232,0.5);color:var(--C);transition:background .25s,color .25s,border-color .25s,transform .2s;white-space:nowrap;}
     .banner-btn:hover{background:var(--C);color:var(--G);border-color:var(--C);transform:translateY(-1px);}
 
@@ -116,12 +116,19 @@
       .mob-nav{display:block;}
       body{padding-bottom:60px;}
     }
+
+    .pin-logo{display:inline-flex;align-items:center;gap:2px;line-height:1;font-weight:800;}
+    .pin-dots{display:inline-flex;flex-direction:column;gap:0.25em;margin:0 0.15em;align-items:center;justify-content:center;}
+    .pin-dots .dot{width:0.22em;height:0.22em;border-radius:50%;display:block;}
+    .pin-dots .dot-gold{background:var(--A);}
+    .pin-dots .dot-cream{background:var(--C);}
+    .pin-dots .dot-dark{background:var(--G);}
   </style>
 </head>
 <body>
 <nav>
   <div class="ni">
-    <a class="logo" href="index.html">P:IN</a>
+    <a class="logo" href="index.html"><span class="pin-logo">P<span class="pin-dots"><span class="dot dot-cream"></span><span class="dot dot-cream"></span></span>IN</span></a>
     <ul class="nm">
       <li><a href="studio.html" class="on">Studio</a></li>
       <li><a href="design.html">Design</a></li>
@@ -135,7 +142,7 @@
   <div class="ph-in">
     <div>
       <p class="ph-tag">Self Photo Studio</p>
-      <h1 class="ph-title">PIN<br><em>Studio</em></h1>
+      <h1 class="ph-title"><span class="pin-logo hero-pin">P<span class="pin-dots"><span class="dot dot-gold"></span><span class="dot dot-gold"></span></span>IN</span><br><em>Studio</em></h1>
     </div>
     <div class="ph-right">
       <p class="ph-desc">단순한 촬영 공간을 넘어 다양한 감각을 직접 경험할 수 있는 체험형 셀프 스튜디오. 꽃꽂이, 키링 만들기 등 PIN만의 감성 체험도 함께 즐길 수 있습니다.</p>
