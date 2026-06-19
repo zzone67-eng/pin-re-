@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P:IN Studio | 셀프 스튜디오</title>
+  <link rel="icon" href="image/OG.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&family=Fragment+Mono&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --G:#253528;--Gm:#344a38;--C:#f3f0e8;--P:#f6f4f0;
+      --A:#b8a478;--M:#7a8a7d;--L:rgba(37,53,40,0.11);
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'Inter',system-ui,sans-serif;
+      --mono:'Fragment Mono',monospace;
+      --W:1080px;
+    }
+    html{scroll-behavior:smooth;}
+    body{background:var(--P);color:var(--G);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+    img{display:block;width:100%;object-fit:cover;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--G);padding:0 clamp(32px,6vw,80px);}
+    .ni{max-width:var(--W);margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:56px;}
+    .logo{font-family:var(--mono);font-size:13px;letter-spacing:0.1em;color:var(--C);}
+    .nm{display:flex;gap:28px;list-style:none;}
+    .nm a{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--C);opacity:0.4;transition:opacity .2s;}
+    .nm a:hover,.nm a.on{opacity:1;}
+    .nbt{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:7px 16px;border:1px solid rgba(243,240,232,0.35);color:var(--C);transition:all .2s;}
+    .nbt:hover{background:var(--C);color:var(--G);}
+
+    /* FOOTER */
+    footer{background:var(--G);color:var(--C);padding:clamp(64px,9vw,120px) clamp(32px,6vw,80px) 48px;}
+    .fi{max-width:var(--W);margin:0 auto;}
+    .fb{font-family:var(--serif);font-size:clamp(48px,8vw,104px);font-weight:300;line-height:0.88;letter-spacing:-0.02em;margin-bottom:72px;}
+    .fb em{font-style:italic;color:var(--A);}
+    .fc{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-top:40px;border-top:1px solid rgba(243,240,232,0.12);}
+    .fch{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--A);margin-bottom:14px;}
+    .fcb{font-size:14px;line-height:2.1;color:rgba(243,240,232,0.8);}
+    .fcb a:hover{color:var(--C);}
+    .fcp{margin-top:48px;padding-top:20px;border-top:1px solid rgba(243,240,232,0.08);display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:rgba(243,240,232,0.4);}
+
+    /* COMMON */
+    .wrap{max-width:var(--W);margin:0 auto;}
+    .tag{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--A);display:flex;align-items:center;gap:8px;margin-bottom:36px;}
+    .tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--A);flex-shrink:0;}
+    .sec{padding:clamp(64px,9vw,120px) clamp(32px,6vw,80px);}
+    .bl{border-top:1px solid var(--L);}
+    .tlink{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--G);border-bottom:1px solid var(--G);padding-bottom:2px;opacity:0.5;transition:opacity .2s;}
+    .tlink:hover{opacity:1;}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+    .reveal.on{opacity:1;transform:none;}
+    @media(max-width:768px){.nm{display:none;}.fc{grid-template-columns:1fr 1fr;}.fcp{flex-direction:column;gap:8px;}}
+
+    /* PAGE HEADER */
+    .ph{background:var(--G);color:var(--C);padding:100px clamp(32px,6vw,80px) 72px;}
+    .ph-in{max-width:var(--W);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;}
+    .ph-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--A);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+    .ph-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--A);}
+    .ph-title{font-family:var(--serif);font-size:clamp(48px,8vw,104px);font-weight:300;line-height:0.88;letter-spacing:-0.02em;color:var(--C);}
+    .ph-title em{font-style:italic;color:var(--A);}
+    .ph-right{display:flex;flex-direction:column;justify-content:flex-end;gap:24px;}
+    .ph-desc{font-size:13px;color:rgba(243,240,232,0.82);line-height:1.9;max-width:38ch;}
+    .ph-cta{width:fit-content;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;background:var(--A);color:var(--G);padding:11px 22px;transition:gap .3s;}
+    .ph-cta:hover{gap:18px;}
+    .ph-cta::after{content:'→';}
+
+    /* SPACES */
+    .sp-row{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:72px 0;border-bottom:1px solid var(--L);}
+    .sp-row:first-child{padding-top:0;}
+    .sp-row.rv{direction:rtl;}
+    .sp-row.rv > *{direction:ltr;}
+    .sp-photo{aspect-ratio:4/3;overflow:hidden;background:#d4dcd0;position:relative;}
+    .sp-photo img{height:100%;transition:transform .6s;}
+    .sp-row:hover .sp-photo img{transform:scale(1.03);}
+    .sp-num{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--A);margin-bottom:18px;}
+    .sp-name{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.05;margin-bottom:18px;color:var(--G);}
+    .sp-name em{font-style:italic;color:var(--Gm);}
+    .sp-desc{font-size:15px;color:#3a4a3e;line-height:1.9;max-width:36ch;margin-bottom:28px;}
+    .sp-btn{width:fit-content;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;border-bottom:1px solid var(--G);padding-bottom:2px;transition:gap .3s;opacity:0.6;}
+    .sp-btn:hover{opacity:1;gap:16px;}
+    .sp-btn::after{content:'→';}
+
+    /* BANNER */
+    .banner{background:var(--G);color:var(--C);padding:72px clamp(32px,6vw,80px);display:flex;justify-content:space-between;align-items:center;gap:40px;}
+    .banner-in{max-width:var(--W);margin:0 auto;width:100%;display:flex;justify-content:space-between;align-items:center;gap:40px;}
+    .banner-txt{font-family:var(--serif);font-size:clamp(28px,4vw,52px);font-weight:300;line-height:1.1;}
+    .banner-txt em{font-style:italic;color:var(--A);}
+    .banner-btn{flex-shrink:0;font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:14px 28px;border:1px solid rgba(243,240,232,0.4);color:var(--C);transition:all .2s;white-space:nowrap;}
+    .banner-btn:hover{background:var(--C);color:var(--G);border-color:var(--C);}
+
+    @media(max-width:768px){
+      .ph-in{grid-template-columns:1fr;gap:32px;padding-top:80px;}
+      .sp-row,.sp-row.rv{grid-template-columns:1fr;direction:ltr;}
+      .banner-in{flex-direction:column;text-align:center;}
+    }
+
+    /* ── 버튼 공통 개선 ──────────────────────── */
+    .nbt{
+      font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+      padding:10px 22px;border:1.5px solid rgba(243,240,232,0.6);color:var(--C);
+      transition:background .25s,color .25s,border-color .25s;cursor:pointer;
+    }
+    .nbt:hover{background:var(--C);color:var(--G);border-color:var(--C);}
+
+    .hero-cta{
+      margin-top:44px;width:fit-content;display:inline-flex;align-items:center;gap:14px;
+      font-family:var(--mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;
+      background:var(--A);color:var(--G);padding:14px 28px;font-weight:500;
+      transition:gap .3s,background .25s,transform .2s;
+    }
+    .hero-cta:hover{gap:22px;background:#cac08a;transform:translateY(-1px);}
+    .hero-cta::after{content:'→';}
+
+    .tlink{
+      font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--G);border-bottom:1.5px solid var(--G);padding-bottom:3px;opacity:0.7;
+      transition:opacity .2s,gap .25s;display:inline-flex;align-items:center;gap:6px;
+    }
+    .tlink::after{content:'→';transition:transform .25s;}
+    .tlink:hover{opacity:1;}
+    .tlink:hover::after{transform:translateX(4px);}
+
+    .price-detail-btn{
+      display:inline-flex;align-items:center;gap:12px;margin-top:36px;
+      font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+      background:var(--G);color:var(--C);padding:13px 26px;
+      transition:gap .3s,background .25s,transform .2s;
+    }
+    .price-detail-btn:hover{gap:20px;background:var(--Gm);transform:translateY(-1px);}
+
+    .ph-cta{
+      width:fit-content;display:inline-flex;align-items:center;gap:12px;
+      font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+      background:var(--A);color:var(--G);padding:13px 26px;font-weight:500;
+      transition:gap .3s,background .25s,transform .2s;
+    }
+    .ph-cta:hover{gap:20px;background:#cac08a;transform:translateY(-1px);}
+    .ph-cta::after{content:'→';}
+
+    .sp-btn{
+      width:fit-content;display:inline-flex;align-items:center;gap:10px;
+      font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+      background:var(--G);color:var(--C);padding:11px 22px;
+      transition:gap .3s,background .25s,transform .2s;opacity:1;border:none;
+    }
+    .sp-btn:hover{gap:18px;background:var(--Gm);transform:translateY(-1px);}
+    .sp-btn::after{content:'→';}
+
+    .banner-btn{
+      flex-shrink:0;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+      padding:14px 32px;border:1.5px solid rgba(243,240,232,0.5);color:var(--C);
+      transition:background .25s,color .25s,border-color .25s,transform .2s;white-space:nowrap;
+    }
+    .banner-btn:hover{background:var(--C);color:var(--G);border-color:var(--C);transform:translateY(-1px);}
+
+    .res-link{
+      display:inline-flex;align-items:center;gap:12px;margin-top:32px;
+      font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+      background:var(--G);color:var(--C);padding:13px 26px;
+      transition:gap .3s,background .25s,transform .2s;
+    }
+    .res-link:hover{gap:20px;background:var(--Gm);transform:translateY(-1px);}
+    .res-link::after{content:'→';}
+
+    .dc-btn{
+      display:block;margin-top:32px;padding:13px 20px;text-align:center;
+      font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+      border:1.5px solid currentColor;transition:background .25s,color .25s,transform .2s;cursor:pointer;
+    }
+    .dc-btn:hover{transform:translateY(-1px);}
+    .dc:not(.dark) .dc-btn:hover{background:var(--G);color:var(--C);}
+    .dc.dark .dc-btn{background:var(--C);color:var(--G);}
+    .dc.dark .dc-btn:hover{background:var(--A);border-color:var(--A);}
+
+    .fb2{
+      font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+      padding:8px 16px;border:1.5px solid var(--L);background:none;cursor:pointer;color:var(--G);
+      transition:all .2s;
+    }
+    .fb2.on,.fb2:hover{background:var(--G);color:var(--C);border-color:var(--G);}
+
+    /* ── 인터렉션 ─────────────────────────────── */
+
+    /* 이미지 호버 줌 */
+    .st img,.sp-photo img,.wc img,.card-lg img,.card-sq img,.gfour .card-sq img,
+    .about-img-main img,.about-img-sub img,.about-img img{
+      transition:transform .65s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .st:hover img{transform:scale(1.06);}
+    .sp-photo:hover img{transform:scale(1.04);}
+    .wc:hover img,.card-lg:hover img,.card-sq:hover img{transform:scale(1.04);}
+    .about-img-main:hover img{transform:scale(1.03);}
+
+    /* 카드 호버 */
+    .rv{
+      background:var(--P);padding:32px 28px;
+      border-left:3px solid transparent;
+      transition:border-color .25s,background .25s;
+    }
+    .rv:hover{border-left-color:var(--A);background:#eeeae0;}
+
+    .dc{
+      border:1.5px solid var(--L);padding:36px 28px 40px;
+      transition:transform .25s,box-shadow .25s;
+    }
+    .dc:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(37,53,40,0.1);}
+    .dc.dark:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(37,53,40,0.25);}
+
+    /* 스페이스 카드 */
+    .st{aspect-ratio:3/4;overflow:hidden;background:#d4dcd0;position:relative;cursor:pointer;}
+    .st::after{
+      content:'';position:absolute;inset:0;
+      background:rgba(37,53,40,0);
+      transition:background .3s;
+    }
+    .st:hover::after{background:rgba(37,53,40,0.12);}
+
+    /* 작업물 카드 overflow 처리 */
+    .card-lg,.card-sq,.wc{overflow:hidden;background:#d4dcd0;cursor:pointer;}
+
+    /* 스크롤 reveal 딜레이 */
+    .reveal:nth-child(2){transition-delay:0.1s;}
+    .reveal:nth-child(3){transition-delay:0.15s;}
+
+    /* 네비 링크 언더라인 애니메이션 */
+    .nm a{position:relative;}
+    .nm a::after{
+      content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;
+      background:var(--C);transition:width .25s;
+    }
+    .nm a:hover::after,.nm a.on::after{width:100%;}
+
+    /* 섹션 구분선 */
+    .bl{border-top:1px solid var(--L);}
+
+    /* 가격표 행 호버 */
+    .pr{transition:background .2s,padding-left .2s;}
+    .pr:hover{background:rgba(37,53,40,0.03);padding-left:8px;}
+    .prow{transition:background .2s;}
+    .prow:hover{background:rgba(37,53,40,0.04);}
+  </style>
+</head>
+<body>
+<nav><div class="ni">
+  <a class="logo" href="index.html">P:IN</a>
+  <ul class="nm"><li><a href="studio.html" class="on">Studio</a></li><li><a href="design.html">Design</a></li><li><a href="price.html">Price</a></li></ul>
+  <a class="nbt" href="https://m.place.naver.com/place/2090867587/home?entry=pll" target="_blank">예약하기</a>
+</div></nav>
+
+<div class="ph">
+  <div class="ph-in">
+    <div>
+      <p class="ph-tag">Self Photo Studio</p>
+      <h1 class="ph-title">PIN<br><em>Studio</em></h1>
+    </div>
+    <div class="ph-right">
+      <p class="ph-desc">단순한 촬영 공간을 넘어 다양한 감각을 직접 경험할 수 있는 체험형 셀프 스튜디오. 꽃꽂이, 키링 만들기 등 PIN만의 감성 체험도 함께 즐길 수 있습니다.</p>
+      <a class="ph-cta" href="https://m.place.naver.com/place/2090867587/home?entry=pll" target="_blank">예약 하러가기</a>
+    </div>
+  </div>
+</div>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sp-row reveal">
+      <div class="sp-photo"><img src="image/Sample1.jpg" alt="PIN PACKAGE"></div>
+      <div>
+        <p class="sp-num">Space 01</p>
+        <h2 class="sp-name">PIN<br><em>PACKAGE</em></h2>
+        <p class="sp-desc">PIN의 시그니처 패키지 공간. 다양한 소품과 감성적인 배경으로 꾸며진 공간에서 나만의 특별한 순간을 기록하세요.</p>
+        <a class="sp-btn" href="https://m.place.naver.com/place/2090867587/home?entry=pll" target="_blank">예약하기</a>
+      </div>
+    </div>
+    <div class="sp-row rv reveal">
+      <div class="sp-photo"><img src="image/Sample2.jpg" alt="PIN EXPERIENCE"></div>
+      <div>
+        <p class="sp-num">Space 02</p>
+        <h2 class="sp-name">PIN<br><em>EXPERIENCE</em></h2>
+        <p class="sp-desc">촬영 외에도 꽃꽂이, 키링 만들기 등 체험 콘텐츠를 함께 즐길 수 있는 PIN만의 체험형 공간입니다.</p>
+        <a class="sp-btn" href="https://m.place.naver.com/place/2090867587/home?entry=pll" target="_blank">예약하기</a>
+      </div>
+    </div>
+    <div class="sp-row reveal">
+      <div class="sp-photo"><img src="image/Sample3.jpg" alt="PIN ROOM"></div>
+      <div>
+        <p class="sp-num">Space 03</p>
+        <h2 class="sp-name">PIN<br><em>ROOM</em></h2>
+        <p class="sp-desc">자연스러운 분위기 속에서 일상의 특별한 순간을 자유롭게 담아낼 수 있는 공간입니다.</p>
+        <a class="sp-btn" href="https://m.place.naver.com/place/2090867587/home?entry=pll" target="_blank">예약하기</a>
+      </div>
+    </div>
+    <div class="sp-row rv reveal">
+      <div class="sp-photo"><img src="image/Sample4.jpg" alt="PICNIC ROOM"></div>
+      <div>
+        <p class="sp-num">Space 04</p>
+        <h2 class="sp-name">PICNIC<br><em>ROOM</em></h2>
+        <p class="sp-desc">피크닉 무드의 아늑한 공간. 소중한 사람과 함께하는 일상의 한 장면을 감성적으로 기록해보세요.</p>
+        <a class="sp-btn" href="https://m.place.naver.com/place/2090867587/home?entry=pll" target="_blank">예약하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="banner">
+  <div class="banner-in reveal">
+    <p class="banner-txt">Come create your<br>own <em>moment</em>.</p>
+    <a class="banner-btn" href="https://m.place.naver.com/place/2090867587/home?entry=pll" target="_blank">예약 하러가기</a>
+  </div>
+</div>
+
+<footer><div class="fi">
+  <h2 class="fb reveal">Let's<br><em>design</em><br>together.</h2>
+  <div class="fc reveal">
+    <div><p class="fch">Email</p><div class="fcb"><a href="mailto:pinstudio0303@naver.com">pinstudio0303@naver.com</a></div></div>
+    <div><p class="fch">Address</p><div class="fcb">울산광역시<br>남구 번영로 189 2층</div></div>
+    <div><p class="fch">Instagram</p><div class="fcb"><a href="https://www.instagram.com/p_in_design/" target="_blank">@p_in_design</a><br><a href="https://www.instagram.com/p_in_studio" target="_blank">@p_in_studio</a></div></div>
+    <div><p class="fch">Pages</p><div class="fcb"><a href="studio.html">Studio</a><br><a href="design.html">Design</a><br><a href="price.html">Price</a></div></div>
+  </div>
+  <div class="fcp"><span>© 2026 AH YEONG · P:IN STUDIO</span><span>무단 복제 및 상업적 사용 금지.</span></div>
+</div></footer>
+
+
+<script>
+  // 스크롤 reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => {
+          e.target.classList.add('on');
+        }, e.target.dataset.delay || 0);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+
+  // reveal 요소에 순차 딜레이
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    const siblings = el.parentElement.querySelectorAll('.reveal');
+    const idx = Array.from(siblings).indexOf(el);
+    el.dataset.delay = idx * 80;
+    io.observe(el);
+  });
+
+  // 필터 버튼 (design 페이지)
+  document.querySelectorAll('.fb2').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.fb2').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+    });
+  });
+
+  // 네비 스크롤 시 배경 강조
+  const nav = document.querySelector('nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        nav.style.boxShadow = '0 1px 20px rgba(37,53,40,0.18)';
+      } else {
+        nav.style.boxShadow = 'none';
+      }
+    });
+  }
+
+  // 이미지 패럴렉스 (히어로 배경)
+  const heroBg = document.querySelector('.hero-bg img');
+  if (heroBg) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      heroBg.style.transform = 'translateY(' + (y * 0.25) + 'px)';
+    }, { passive: true });
+  }
+</script>
+
+</body></html>

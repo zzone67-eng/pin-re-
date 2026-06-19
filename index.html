@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P:IN | 디자인 & 셀프 스튜디오</title>
+  <meta name="description" content="울산의 감각적인 디자인 스튜디오 P:IN.">
+  <meta property="og:title" content="P:IN | 디자인 & 셀프 스튜디오">
+  <meta property="og:image" content="image/OG.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="image/OG.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&family=Fragment+Mono&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --G:#253528;--Gm:#344a38;--C:#f3f0e8;--P:#f6f4f0;
+      --A:#b8a478;--M:#7a8a7d;--L:rgba(37,53,40,0.11);
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'Inter',system-ui,sans-serif;
+      --mono:'Fragment Mono',monospace;
+      --W:1080px;
+    }
+    html{scroll-behavior:smooth;}
+    body{background:var(--P);color:var(--G);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+    img{display:block;width:100%;object-fit:cover;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--G);padding:0 clamp(32px,6vw,80px);}
+    .ni{display:flex;justify-content:space-between;align-items:center;height:56px;}
+    .logo{font-family:var(--mono);font-size:13px;letter-spacing:0.1em;color:var(--C);}
+    .nm{display:flex;gap:28px;list-style:none;}
+    .nm a{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--C);opacity:0.4;transition:opacity .2s;}
+    .nm a:hover,.nm a.on{opacity:1;}
+    .nbt{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:7px 16px;border:1px solid rgba(243,240,232,0.35);color:var(--C);transition:all .2s;}
+    .nbt:hover{background:var(--C);color:var(--G);}
+
+    /* FOOTER */
+    footer{background:var(--G);color:var(--C);padding:clamp(64px,9vw,120px) clamp(32px,6vw,80px) 48px;}
+    .fi{max-width:var(--W);margin:0 auto;}
+    .fb{font-family:var(--serif);font-size:clamp(48px,8vw,104px);font-weight:300;line-height:0.88;letter-spacing:-0.02em;margin-bottom:72px;}
+    .fb em{font-style:italic;color:var(--A);}
+    .fc{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-top:40px;border-top:1px solid rgba(243,240,232,0.12);}
+    .fch{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--A);margin-bottom:14px;}
+    .fcb{font-size:14px;line-height:2.1;color:rgba(243,240,232,0.8);}
+    .fcb a:hover{color:var(--C);}
+    .fcp{margin-top:48px;padding-top:20px;border-top:1px solid rgba(243,240,232,0.08);display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:rgba(243,240,232,0.4);}
+
+    /* COMMON */
+    .wrap{max-width:var(--W);margin:0 auto;}
+    .tag{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--A);display:flex;align-items:center;gap:8px;margin-bottom:36px;}
+    .tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--A);flex-shrink:0;}
+    .sec{padding:clamp(64px,9vw,120px) clamp(32px,6vw,80px);}
+    .bl{border-top:1px solid var(--L);}
+    .tlink{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--G);border-bottom:1px solid var(--G);padding-bottom:2px;opacity:0.5;transition:opacity .2s;}
+    .tlink:hover{opacity:1;}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+    .reveal.on{opacity:1;transform:none;}
+    /* ABOUT 업데이트 */
+    .about-body{display:flex;flex-direction:column;gap:20px;}
+    .about-p{font-size:15px;color:#3a4a3e;line-height:1.95;}
+
+    .about-imgs{display:grid;grid-template-rows:1fr auto;gap:3px;}
+    .about-img-main{aspect-ratio:3/4;overflow:hidden;background:#d4dcd0;position:relative;}
+    .about-img-main img{height:100%;object-position:center top;}
+    .about-img-main::after{content:'AH YEONG · P:IN';position:absolute;bottom:18px;left:18px;font-family:var(--mono);font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--C);opacity:0.7;}
+    .about-img-sub{aspect-ratio:3/2;overflow:hidden;background:#d4dcd0;}
+    .about-img-sub img{height:100%;object-position:center;}
+
+
+    /* PRICE SUMMARY */
+    .price-cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+    .price-col{}
+    .price-col-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--A);margin-bottom:16px;display:flex;align-items:center;gap:6px;}
+    .price-col-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--A);}
+    .price-rows{border-top:1px solid var(--L);}
+    .pr{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--L);font-size:15px;gap:12px;}
+    .pr span:first-child{color:var(--G);}
+    .pr span:last-child{font-family:var(--mono);font-size:11px;color:var(--G);white-space:nowrap;flex-shrink:0;}
+    .pr.sub span:first-child{color:#5a6e5e;font-size:14px;padding-left:12px;}
+    .pr.sub span:last-child{color:#5a6e5e;font-size:13px;}
+    .pr.exp span:first-child{color:var(--G);}
+    .pr.exp span:last-child{color:var(--A);font-family:var(--mono);font-size:11px;}
+    .pr.featured{background:var(--G);padding:13px 14px;border-bottom:none;margin-bottom:1px;}
+    .pr.featured span:first-child{color:var(--C);font-weight:400;}
+    .pr.featured span:last-child{color:var(--A);}
+    .price-note{font-family:var(--mono);font-size:11px;color:#5a6e5e;letter-spacing:0.08em;margin-top:14px;}
+    .price-detail-btn{display:inline-flex;align-items:center;gap:10px;margin-top:36px;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;background:var(--G);color:var(--C);padding:12px 24px;transition:gap .3s,background .2s;}
+    .price-detail-btn:hover{gap:18px;background:var(--Gm);}
+
+    @media(max-width:680px){.price-cols{grid-template-columns:1fr;gap:40px;}}
+    /* 가독성 강화 */
+    .sh-title{font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);font-weight:300;color:var(--G);}
+    .wt{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--G);}
+    .rtxt{font-family:var(--serif);font-size:16px;font-weight:300;line-height:1.7;color:var(--G);}
+    .rv{background:var(--P);padding:28px 24px;border-left:2px solid transparent;transition:border-color .2s;}
+    .rv:hover{border-left-color:var(--A);}
+
+    @media(max-width:768px){.nm{display:none;}.fc{grid-template-columns:1fr 1fr;}.fcp{flex-direction:column;gap:8px;}}
+
+    /* HERO */
+    .hero{min-height:100svh;background:var(--G);color:var(--C);display:grid;grid-template-rows:1fr auto;padding:0 clamp(32px,6vw,80px);}
+    .hero-inner{max-width:var(--W);margin:0 auto;width:100%;display:grid;grid-template-rows:1fr auto;padding-top:80px;padding-bottom:48px;}
+    .hero-main{display:flex;flex-direction:column;justify-content:center;}
+    .hero-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--A);margin-bottom:32px;display:flex;align-items:center;gap:10px;}
+    .hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--A);}
+    .hero-title{font-family:var(--serif);font-size:clamp(64px,10vw,136px);font-weight:300;line-height:0.88;letter-spacing:-0.02em;color:var(--C);}
+    .hero-title em{font-style:italic;color:var(--A);}
+    .hero-sub{margin-top:36px;font-size:15px;color:rgba(243,240,232,0.78);max-width:30ch;line-height:1.9;}
+    .hero-cta{margin-top:44px;width:fit-content;display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;background:var(--A);color:var(--G);padding:13px 26px;font-weight:400;transition:gap .3s,background .2s;}
+    .hero-cta:hover{gap:20px;background:#cac08a;}
+    .hero-cta::after{content:'→';}
+    .hero-img{position:absolute;right:0;top:0;width:42%;height:100%;z-index:0;opacity:0.18;}
+    .hero-img img{height:100%;object-position:center top;}
+    .hero{position:relative;}
+    .hero-inner{position:relative;z-index:1;}
+    .hero-foot{border-top:1px solid rgba(243,240,232,0.1);padding-top:24px;display:flex;justify-content:space-between;align-items:flex-end;}
+    .hero-fl{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;color:rgba(243,240,232,0.3);text-transform:uppercase;}
+    .hero-fr{font-size:12px;color:rgba(243,240,232,0.3);}
+
+    /* ABOUT */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+    .about-h{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.1;margin-bottom:28px;color:var(--G);}
+    .about-h em{font-style:italic;color:var(--Gm);}
+    .about-p{font-size:13px;color:var(--M);line-height:1.95;}
+    .about-img{aspect-ratio:3/4;overflow:hidden;background:#d4dcd0;position:relative;}
+    .about-img img{height:100%;object-position:center top;}
+    .about-img::after{content:'AH YEONG · P:IN';position:absolute;bottom:18px;left:18px;font-family:var(--mono);font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--C);opacity:0.7;}
+
+    /* STUDIO GRID */
+    .sh{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;}
+    .sh-title{font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);font-weight:300;color:var(--G);}
+    .sg{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+    .st{aspect-ratio:3/4;overflow:hidden;background:#d4dcd0;position:relative;}
+    .st img{height:100%;transition:transform .6s;}
+    .st:hover img{transform:scale(1.05);}
+    .sl{position:absolute;bottom:0;left:0;right:0;padding:28px 12px 12px;background:linear-gradient(transparent,rgba(37,53,40,0.8));font-family:var(--mono);font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--C);}
+
+    /* WORK PREVIEW */
+    .wp{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+    .wp-main{}
+    .wp-sub{display:flex;flex-direction:column;gap:24px;}
+    .wc{overflow:hidden;background:#d4dcd0;}
+    .wc img{height:100%;transition:transform .6s;}
+    .wc:hover img{transform:scale(1.03);}
+    .wca{aspect-ratio:4/3;}
+    .wcsq{aspect-ratio:4/3;}
+    .wi{margin-top:12px;}
+    .wd{font-family:var(--mono);font-size:10px;color:var(--A);letter-spacing:.1em;margin-bottom:6px;}
+    .wt{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--G);}
+
+    /* REVIEWS */
+    .rg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--L);}
+    .rv{background:var(--P);padding:32px 28px;}
+    .rwho{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--A);margin-bottom:16px;display:flex;align-items:center;gap:6px;}
+    .rwho::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--A);}
+    .rtxt{font-family:var(--serif);font-size:19px;font-weight:300;line-height:1.7;color:var(--G);}
+
+    /* ABOUT 업데이트 */
+    .about-body{display:flex;flex-direction:column;gap:20px;}
+    .about-p{font-size:15px;color:#3a4a3e;line-height:1.95;}
+
+    .about-imgs{display:grid;grid-template-rows:1fr auto;gap:3px;}
+    .about-img-main{aspect-ratio:3/4;overflow:hidden;background:#d4dcd0;position:relative;}
+    .about-img-main img{height:100%;object-position:center top;}
+    .about-img-main::after{content:'AH YEONG · P:IN';position:absolute;bottom:18px;left:18px;font-family:var(--mono);font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--C);opacity:0.7;}
+    .about-img-sub{aspect-ratio:3/2;overflow:hidden;background:#d4dcd0;}
+    .about-img-sub img{height:100%;object-position:center;}
+
+
+    /* PRICE SUMMARY */
+    .price-cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+    .price-col{}
+    .price-col-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--A);margin-bottom:16px;display:flex;align-items:center;gap:6px;}
+    .price-col-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--A);}
+    .price-rows{border-top:1px solid var(--L);}
+    .pr{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--L);font-size:15px;gap:12px;}
+    .pr span:first-child{color:var(--G);}
+    .pr span:last-child{font-family:var(--mono);font-size:11px;color:var(--G);white-space:nowrap;flex-shrink:0;}
+    .pr.sub span:first-child{color:#5a6e5e;font-size:14px;padding-left:12px;}
+    .pr.sub span:last-child{color:#5a6e5e;font-size:13px;}
+    .pr.exp span:first-child{color:var(--G);}
+    .pr.exp span:last-child{color:var(--A);font-family:var(--mono);font-size:11px;}
+    .pr.featured{background:var(--G);padding:13px 14px;border-bottom:none;margin-bottom:1px;}
+    .pr.featured span:first-child{color:var(--C);font-weight:400;}
+    .pr.featured span:last-child{color:var(--A);}
+    .price-note{font-family:var(--mono);font-size:11px;color:#5a6e5e;letter-spacing:0.08em;margin-top:14px;}
+    .price-detail-btn{display:inline-flex;align-items:center;gap:10px;margin-top:36px;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;background:var(--G);color:var(--C);padding:12px 24px;transition:gap .3s,background .2s;}
+    .price-detail-btn:hover{gap:18px;background:var(--Gm);}
+
+    @media(max-width:680px){.price-cols{grid-template-columns:1fr;gap:40px;}}
+    /* 가독성 강화 */
+    .sh-title{font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);font-weight:300;color:var(--G);}
+    .wt{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--G);}
+    .rtxt{font-family:var(--serif);font-size:16px;font-weight:300;line-height:1.7;color:var(--G);}
+    .rv{background:var(--P);padding:28px 24px;border-left:2px solid transparent;transition:border-color .2s;}
+    .rv:hover{border-left-color:var(--A);}
+
+    @media(max-width:768px){
+      .about-grid{grid-template-columns:1fr;gap:40px;}
+      .about-imgs{grid-template-rows:auto auto;}.about-img-main{aspect-ratio:4/3;}.about-img-sub{aspect-ratio:16/9;}
+      .sg{grid-template-columns:1fr 1fr;}
+      .wp{grid-template-columns:1fr;}
+      .wp{grid-template-columns:1fr;}.wp-sub{flex-direction:row;}
+      .rg{grid-template-columns:1fr;}
+      .hero-img{display:none;}
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="ni">
+    <a class="logo" href="index.html">P:IN</a>
+    <ul class="nm">
+      <li><a href="studio.html">Studio</a></li>
+      <li><a href="design.html">Design</a></li>
+      <li><a href="price.html">Price</a></li>
+    </ul>
+    <a class="nbt" href="https://m.place.naver.com/place/2090867587/home?entry=pll" target="_blank">예약하기</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-img"><img src="image/BI1.jpg" alt=""></div>
+  <div class="hero-inner">
+    <div class="hero-main reveal">
+      <p class="hero-eyebrow">Design Studio · Self Photo Studio · Ulsan</p>
+      <h1 class="hero-title">PIN<br>YOUR<br><em>MOMENT</em></h1>
+      <p class="hero-sub">작은 압정 하나가 추억을 오래 붙잡아두듯, 기억하고 싶은 순간을 PIN만의 감각으로 기록합니다.</p>
+      <a class="hero-cta" href="https://m.place.naver.com/place/2090867587/home?entry=pll" target="_blank">예약 하러가기</a>
+    </div>
+    <div class="hero-foot">
+      <span class="hero-fl">© 2026 P:IN STUDIO</span>
+      <span class="hero-fr">울산광역시 남구 번영로 189 2층</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec bl">
+  <div class="wrap">
+    <p class="tag">About</p>
+    <div class="about-grid reveal">
+      <div>
+        <h2 class="about-h">Like a pin,<br><em>making a strong<br>impression.</em></h2>
+        <div class="about-body">
+          <p class="about-p">PIN DESIGN은 단순히 예쁜 결과물을 만드는 작업이 아닙니다. 작은 압정 하나가 종이를 벽에 단단히 고정하듯, 브랜드의 분위기와 감정을 사람들의 기억 속에 오래 남기기 위한 디자인을 만들어갑니다.</p>
+          <p class="about-p">특히 브랜드의 이름 속 글자를 직접 추출하고 재해석하여, 브랜드만의 의미를 담은 심볼과 로고를 제작하는 작업을 중요하게 생각합니다. 또한 디자인과 촬영이 분리되지 않는다는 점 역시 특징입니다. 제품과 공간, 인물의 분위기를 직접 촬영하고 그 무드를 그대로 디자인 작업에 연결해 하나의 흐름처럼 이어갑니다.</p>
+          <p class="about-p">브랜드와 제품에 어울리는 AI 작업 또한 함께 활용하고 있습니다. 단순한 생성 이미지가 아닌, 제품의 분위기와 콘셉트에 맞는 비주얼을 제작하여 촬영과 디자인 사이의 확장된 표현을 만들어냅니다. 필요한 경우 제품 연출 이미지, 그래픽 요소, 무드 비주얼 등을 AI와 함께 제작해 더욱 다양한 방향의 브랜드 콘텐츠를 완성합니다.</p>
+          <p class="about-p">빠르게 소비되는 디자인보다 오래 바라보게 되는 디자인, 화려함보다 브랜드의 이야기를 담아내는 디자인을 중요하게 생각하며 로고, 포스터, 패키지, 리플렛, SNS 콘텐츠까지 브랜드의 첫인상을 섬세하게 만들어갑니다. 작은 디테일 하나까지 감각적으로 꽂히는 순간을 위해, PIN만의 시선으로 디자인을 이어갑니다.</p>
+        </div>
+      </div>
+      <div class="about-imgs">
+        <div class="about-img-main"><img src="image/model.jpg" alt="P:IN STUDIO"></div>
+        <div class="about-img-sub"><img src="image/model2.jpg" alt="P:IN STUDIO"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec bl">
+  <div class="wrap">
+    <div class="sh reveal">
+      <h2 class="sh-title">P:IN Studio</h2>
+      <a class="tlink" href="studio.html">모든 공간 보기 →</a>
+    </div>
+    <div class="sg reveal">
+      <div class="st"><img src="image/Sample1.jpg" alt="PIN PACKAGE"><span class="sl">PIN PACKAGE</span></div>
+      <div class="st"><img src="image/Sample2.jpg" alt="PIN EXPERIENCE"><span class="sl">PIN EXPERIENCE</span></div>
+      <div class="st"><img src="image/Sample3.jpg" alt="PIN ROOM"><span class="sl">PIN ROOM</span></div>
+      <div class="st"><img src="image/Sample4.jpg" alt="PICNIC ROOM"><span class="sl">PICNIC ROOM</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec bl">
+  <div class="wrap">
+    <div class="sh reveal">
+      <h2 class="sh-title">Design Work</h2>
+      <a class="tlink" href="design.html">모든 작업 보기 →</a>
+    </div>
+    <div class="wp reveal">
+      <!-- PALMS 크게 -->
+      <div class="wp-main">
+        <div class="wc wca"><img src="image/PF1.jpg" alt="PALMS 브랜딩"></div>
+        <div class="wi">
+          <p class="wd">Jan 2026 · Branding</p>
+          <p class="wt">스타트업 'PALMS' Brand Identity System</p>
+        </div>
+      </div>
+      <!-- 삼의감각 + 초연정 -->
+      <div class="wp-sub">
+        <div>
+          <div class="wc wcsq"><img src="image/PF3.png" alt="삼의감각 로고"></div>
+          <div class="wi">
+            <p class="wd">Apr 2025 · Logo</p>
+            <p class="wt">시각,청각,촉각 — '삼의감각' 로고</p>
+          </div>
+        </div>
+        <div>
+          <div class="wc wcsq"><img src="image/PF2.jpg" alt="초연정 로고"></div>
+          <div class="wi">
+            <p class="wd">Dec 2025 · Logo</p>
+            <p class="wt">테라리움 공방 '초연정' 로고</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec bl">
+  <div class="wrap">
+    <div class="sh reveal">
+      <h2 class="sh-title">Price</h2>
+      <a class="tlink" href="price.html">자세히 보기 →</a>
+    </div>
+
+    <!-- 스튜디오 + 디자인 나란히 -->
+    <div class="price-cols reveal">
+
+      <!-- 스튜디오 -->
+      <div class="price-col">
+        <p class="price-col-tag">Studio</p>
+        <div class="price-rows">
+          <div class="pr"><span>BASIC ROOM 1인</span><span>25,000원</span></div>
+          <div class="pr"><span>BASIC ROOM 2인</span><span>40,000원</span></div>
+          <div class="pr"><span>PIN ROOM 1인</span><span>30,000원</span></div>
+          <div class="pr"><span>PIN ROOM 2인</span><span>45,000원</span></div>
+          <div class="pr sub"><span>추가 인당</span><span>10,000원</span></div>
+          <div class="pr sub"><span>빈티지 3컷</span><span>15,000원</span></div>
+          <div class="pr sub"><span>증명사진</span><span>35,000원</span></div>
+          <div class="pr exp"><span>꽃꾸 체험 (개별)</span><span>10,000원</span></div>
+          <div class="pr exp"><span>포토키링 체험 (개별)</span><span>7,000원</span></div>
+          <div class="pr exp"><span>PIN 패키지 (꽃꾸+키링)</span><span>15,000원</span></div>
+        </div>
+      </div>
+
+      <!-- 디자인 -->
+      <div class="price-col">
+        <p class="price-col-tag">Design</p>
+        <div class="price-rows">
+          <div class="pr featured">
+            <span>Branding Package</span><span>상담 후 견적</span>
+          </div>
+          <div class="pr"><span>Photo &amp; Leaflet</span><span>₩80,000~</span></div>
+          <div class="pr"><span>Single Design Work</span><span>항목별 별도 견적</span></div>
+          <div class="pr sub"><span>로고 / 명함 / 포스터</span><span></span></div>
+          <div class="pr sub"><span>패키지 &amp; 굿즈</span><span></span></div>
+          <div class="pr sub"><span>상세페이지</span><span></span></div>
+          <div class="pr sub"><span>SNS 정기관리</span><span></span></div>
+        </div>
+        <p class="price-note">* 10% 오프닝 할인 진행 중 · 무료 상담 가능</p>
+      </div>
+
+    </div>
+
+    <a class="price-detail-btn reveal" href="price.html">전체 가격표 보기 →</a>
+  </div>
+</section>
+
+<section class="sec bl">
+  <div class="wrap">
+    <p class="tag reveal">Client Reviews</p>
+  </div>
+  <div style="padding:0 clamp(32px,6vw,80px);">
+    <div class="rg reveal" style="max-width:var(--W);margin:0 auto;">
+      <div class="rv"><p class="rwho">금 · 네이버카페</p><p class="rtxt">"빠른 결과물과 다양한 시안. 맡기셔도 후회없는 선택이 되실 겁니다!"</p></div>
+      <div class="rv"><p class="rwho">to****** · 학원/교육</p><p class="rtxt">"너무 친절하시고 피드백이 아주 빠르고 다 만족스럽습니다."</p></div>
+      <div class="rv"><p class="rwho">AI***** · IT 솔루션</p><p class="rtxt">"처음 상담부터 마무리까지 깔끔하고 빠르게 진행해주셨어요."</p></div>
+      <div class="rv"><p class="rwho">짜빠** · 제조업</p><p class="rtxt">"신속하고 원하는 걸 바로 적용해주셔서 감사합니다."</p></div>
+      <div class="rv"><p class="rwho">훈훈******* · 헬스/스포츠</p><p class="rtxt">"빠르고 퀄리티 높은 작업물 만족스럽네요."</p></div>
+      <div class="rv"><p class="rwho">KI***** · 식당</p><p class="rtxt">"브랜드 이름 글자를 재해석해 로고에 담아주신 점이 정말 인상 깊었습니다!"</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <h2 class="fb reveal">Let's<br><em>design</em><br>together.</h2>
+    <div class="fc reveal">
+      <div><p class="fch">Email</p><div class="fcb"><a href="mailto:pinstudio0303@naver.com">pinstudio0303@naver.com</a></div></div>
+      <div><p class="fch">Address</p><div class="fcb">울산광역시<br>남구 번영로 189 2층</div></div>
+      <div><p class="fch">Instagram</p><div class="fcb"><a href="https://www.instagram.com/p_in_design/" target="_blank">@p_in_design</a><br><a href="https://www.instagram.com/p_in_studio" target="_blank">@p_in_studio</a></div></div>
+      <div><p class="fch">Pages</p><div class="fcb"><a href="studio.html">Studio</a><br><a href="design.html">Design</a><br><a href="price.html">Price</a></div></div>
+    </div>
+    <div class="fcp"><span>© 2026 AH YEONG · P:IN STUDIO</span><span>무단 복제 및 상업적 사용 금지.</span></div>
+  </div>
+</footer>
+<script>
+  const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target);}}),{threshold:0.07});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>
